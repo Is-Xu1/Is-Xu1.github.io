@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OrangeX - Afterschool Coding Program</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    html, body { margin:0; padding:0; height:100%; width:100%; }
+    .wrap { width:100%; height:100%; box-sizing:border-box; }
+    .gradient-bg { background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #2563eb 100%); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04); }
+    .animate-pulse-delayed-1 { animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite; animation-delay:1s; }
+    .animate-pulse-delayed-2 { animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite; animation-delay:2s; }
+    .animate-pulse-delayed-05 { animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite; animation-delay:.5s; }
+    .hidden { display:none; }
+    .spinner { border:2px solid transparent; border-top:2px solid white; border-radius:50%; width:20px; height:20px; animation: spin 1s linear infinite; }
+    @keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+  </style>
+</head>
+<body class="min-h-screen bg-white">
+<div class="wrap">
+  <!-- Main Landing Page -->
+  <div id="landingPage">
+    <!-- Hero Section -->
+    <section class="relative gradient-bg text-white overflow-hidden">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="container mx-auto px-4 py-20 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="flex items-center justify-center gap-3 mb-6">
+            <i data-lucide="code" class="w-12 h-12 text-orange-200"></i>
+            <h1 class="text-5xl font-bold">Orange<span class="text-orange-200">X</span></h1>
+          </div>
+
+          <p class="text-xl mb-8 leading-relaxed max-w-2xl mx-auto">
+            Empowering the next generation of innovators through hands-on coding education. 
+            Transform your child's future with our comprehensive afterschool programming.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-6 mb-12">
+            <div class="flex items-center gap-2">
+              <i data-lucide="zap" class="w-5 h-5 text-orange-200"></i><span>Interactive Learning</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="users" class="w-5 h-5 text-orange-200"></i><span>Small Classes</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="award" class="w-5 h-5 text-orange-200"></i><span>Certified Instructors</span>
+            </div>
+          </div>
+
+          <a href="#enrollment" class="inline-flex items-center gap-2 bg-white text-orange-600 font-semibold px-8 py-4 rounded-lg transition-all duration-200 hover:bg-orange-50 hover:shadow-lg transform hover:-translate-y-0.5">
+            Enroll Your Child Today
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Floating Elements -->
+      <div class="absolute top-20 left-10 opacity-20">
+        <i data-lucide="monitor" class="w-16 h-16 text-white animate-pulse"></i>
+      </div>
+      <div class="absolute top-40 right-16 opacity-20">
+        <i data-lucide="smartphone" class="w-12 h-12 text-white animate-pulse-delayed-1"></i>
+      </div>
+      <div class="absolute bottom-20 left-20 opacity-20">
+        <i data-lucide="globe" class="w-14 h-14 text-white animate-pulse-delayed-2"></i>
+      </div>
+      <div class="absolute bottom-40 right-10 opacity-20">
+        <i data-lucide="cpu" class="w-10 h-10 text-white animate-pulse-delayed-05"></i>
+      </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Choose Your Program</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Age-appropriate curriculum designed to build confidence and technical skills progressively
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- Program Card 1 -->
+          <div class="relative bg-white rounded-xl shadow-lg p-6 card-hover">
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Code Explorers</h3>
+              <p class="text-gray-600 mb-4">Ages 6-10</p>
+              <div class="mb-6">
+                <span class="text-3xl font-bold text-orange-600">$149</span>
+                <span class="text-gray-500">/month</span>
+              </div>
+            </div>
+
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-700 text-sm">Visual programming with Scratch</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-700 text-sm">Interactive games and animations</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-700 text-sm">Problem-solving and logic building</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-700 text-sm">Creative storytelling through code</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-700 text-sm">Small class sizes (max 8 students)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Program Card 2 - Popular -->
+          <div class="relative bg-white rounded-xl shadow-lg p-6 card-hover ring-2 ring-orange-500 scale-105">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
+            </div>
+
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Code Adventurers</h3>
+              <p class="text-gray-600 mb-4">Ages 11-15</p>
+              <div class="mb-6">
+                <span class="text-3xl font-bold text-orange-600">$179</span>
+                <span class="text-gray-500">/month</span>
+              </div>
+            </div>
+
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Python programming fundamentals</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Hands-on projects: games, apps, and tools</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Introduction to web development (HTML/CSS/JS basics)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Collaborative coding and teamwork skills</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Problem-solving with algorithms and logic</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Exploring AI & automation with beginner-friendly tools</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-gray-700 text-sm">Portfolio-ready projects to showcase skills</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enrollment Section (Form + Payment) -->
+    <section id="enrollment" class="py-20">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Google Form Embed -->
+          <div class="bg-white rounded-xl shadow-lg p-4">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Step 1 — Submit Enrollment Form</h3>
+            <p class="text-gray-600 mb-4 text-sm">
+              Please complete the Google Form below. After submitting, confirm using the checkbox to unlock payment options.
+            </p>
+            <div class="rounded-lg overflow-hidden border">
+              <iframe id="enrollForm"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSevUmp8NKErcXTwX9C_X5Qx8nQeDaX8w8SSMVaLRWcXDkctfw/viewform?embedded=true"
+                width="100%" height="1466" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+            <div class="mt-4 flex items-start gap-3">
+              <input id="formSubmitted" type="checkbox" class="mt-1 h-5 w-5 rounded border-gray-300">
+              <label for="formSubmitted" class="text-sm text-gray-700">
+                I have submitted the Google Form and confirmed the information is correct.
+              </label>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">
+              Note: For privacy and security, this page can’t read your Google Form submission directly. Use the checkbox after you submit.
+            </p>
+          </div>
+
+          <!-- Payment + Alternatives -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Step 2 — Choose Payment</h3>
+            <p class="text-gray-600 mb-6">
+              You can pay by <span class="font-medium">Cash (in person)</span>, <span class="font-medium">Zelle</span>, <span class="font-medium">Venmo</span>, or via Stripe below.
+            </p>
+
+            <div class="space-y-4">
+              <!-- Stripe Button (gated) -->
+              <button id="stripeBtn" disabled
+                class="w-full bg-gradient-to-r from-orange-500 to-orange-600 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 hover:from-orange-600 hover:to-orange-700 transform hover:-translate-y-0.5 hover:shadow-lg flex items-center justify-center gap-2">
+                <i data-lucide="credit-card" class="w-5 h-5"></i>
+                Pay Securely with Stripe
+              </button>
+
+              <!-- Alternatives -->
+              <div class="border rounded-lg p-4 bg-gray-50">
+                <h4 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                  <i data-lucide="wallet" class="w-5 h-5"></i> Other Ways to Pay
+                </h4>
+                <ul class="text-sm text-gray-700 space-y-2">
+                  <li><span class="font-medium">Cash:</span> Bring payment to the first class.</li>
+                  <li><span class="font-medium">Zelle:</span> Send to <span class="font-mono">payments@orangexcode.com</span> (add student name in memo).</li>
+                  <li><span class="font-medium">Venmo:</span> Pay <span class="font-mono">@OrangeXCode</span> (add student name in memo).</li>
+                </ul>
+                <p class="text-xs text-gray-500 mt-3">
+                  We’ll match your payment with your form submission using the student name and parent email.
+                </p>
+              </div>
+
+              <!-- Small note -->
+              <p class="text-xs text-gray-500">
+                🔒 Stripe uses 256-bit SSL. We never store card details.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- (Optional) Payment Confirmation Page retained, but not used for gating -->
+  <div id="paymentPage" class="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50 hidden">
+    <div class="container mx-auto px-4 py-16">
+      <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <i data-lucide="check-circle" class="w-8 h-8 text-green-600"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Thank You!</h1>
+        <p class="text-lg text-gray-700 mb-8">Student information has been received. Complete your enrollment by processing payment below.</p>
+
+        <div class="bg-gray-50 rounded-lg p-6 mb-8">
+          <h3 class="font-semibold text-gray-900 mb-4">Enrollment Summary</h3>
+          <div class="space-y-2 text-left">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Student:</span>
+              <span class="font-medium" id="confirmStudentName"></span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Program:</span>
+              <span class="font-medium capitalize" id="confirmProgram"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <a id="stripeBtn2" aria-disabled="true"
+             class="block w-full text-center bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 hover:from-green-600 hover:to-green-700 transform hover:-translate-y-0.5 hover:shadow-lg">
+            Complete Payment with Stripe
+          </a>
+          <button id="backToForm" class="w-full text-gray-600 hover:text-gray-800 py-2">← Back to Edit Information</button>
+        </div>
+
+        <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+          <p class="text-sm text-blue-700">
+            🔒 Your payment is secured with 256-bit SSL encryption. We never store your payment information.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Icons
+  lucide.createIcons();
+
+  // --- Gating logic for Stripe button ---
+  const checkbox = document.getElementById('formSubmitted');
+  const stripeBtn = document.getElementById('stripeBtn');
+
+  // Stripe checkout URL (test)
+  const STRIPE_URL = "https://buy.stripe.com/test_8x2dR23QpchhdND9E66Vq00";
+
+  function updateStripeState() {
+    if (checkbox.checked) {
+      stripeBtn.disabled = false;
+    } else {
+      stripeBtn.disabled = true;
+    }
+  }
+  checkbox.addEventListener('change', updateStripeState);
+  updateStripeState();
+
+  stripeBtn.addEventListener('click', (e) => {
+    if (stripeBtn.disabled) return;
+    window.open(STRIPE_URL, '_blank', 'noopener');
+  });
+
+  // (Optional) If you ever want to use the confirmation page again:
+  const backToFormBtn = document.getElementById('backToForm');
+  if (backToFormBtn) {
+    backToFormBtn.addEventListener('click', () => {
+      document.getElementById('paymentPage').classList.add('hidden');
+      document.getElementById('landingPage').classList.remove('hidden');
+      const anchor = document.getElementById('enrollment');
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Prevent smooth-scroll issues for hash links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
