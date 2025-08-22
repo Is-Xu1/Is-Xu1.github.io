@@ -19,6 +19,7 @@
     .hidden { display:none; }
     .spinner { border:2px solid transparent; border-top:2px solid white; border-radius:50%; width:20px; height:20px; animation: spin 1s linear infinite; }
     @keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+    .selected-ring { box-shadow: 0 0 0 3px rgba(249,115,22,.35); }
   </style>
 </head>
 <body class="min-h-screen bg-white">
@@ -86,7 +87,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <!-- Program Card 1 -->
-          <div class="relative bg-white rounded-xl shadow-lg p-6 card-hover">
+          <div id="card-explorers" class="relative bg-white rounded-xl shadow-lg p-6 card-hover">
             <div class="text-center">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Code Explorers</h3>
               <p class="text-gray-600 mb-4">Ages 6-10</p>
@@ -131,7 +132,7 @@
           </div>
 
           <!-- Program Card 2 - Popular -->
-          <div class="relative bg-white rounded-xl shadow-lg p-6 card-hover ring-2 ring-orange-500 scale-105">
+          <div id="card-adventurers" class="relative bg-white rounded-xl shadow-lg p-6 card-hover ring-2 ring-orange-500 scale-105">
             <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
               <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
             </div>
@@ -205,9 +206,20 @@
           <!-- Payment + Alternatives -->
           <div class="bg-white rounded-xl shadow-lg p-6">
             <h3 class="text-2xl font-bold text-gray-900 mb-2">Step 2 — Choose Payment</h3>
-            <p class="text-gray-600 mb-6">
-              You can pay by <span class="font-medium">Cash (in person)</span>, <span class="font-medium">Zelle</span>, <span class="font-medium">Venmo</span>, or via Stripe below.
+            <p class="text-gray-600">
+              Select the course you’re paying for. Payment will open in a secure Stripe checkout.
             </p>
+
+            <!-- Course selector (kept in sync with the program cards) -->
+            <div class="mt-4 mb-6">
+              <label for="courseSelect" class="block text-sm font-medium text-gray-700 mb-1">Course</label>
+              <select id="courseSelect" class="w-full border rounded-lg px-3 py-2">
+                <option value="">— Select a course —</option>
+                <option value="explorers">Code Explorers — $150</option>
+                <option value="adventurers">Code Adventurers — $160</option>
+              </select>
+              <p id="courseSummary" class="text-xs text-gray-500 mt-2">No course selected.</p>
+            </div>
 
             <div class="space-y-4">
               <!-- Stripe Button (gated) -->
@@ -243,7 +255,7 @@
     </section>
   </div>
 
-  <!-- (Optional) Payment Confirmation Page retained, but not used for gating -->
+  <!-- (Optional) Payment Confirmation Page retained, but not used for gating) -->
   <div id="paymentPage" class="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50 hidden">
     <div class="container mx-auto px-4 py-16">
       <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 text-center">
@@ -289,29 +301,85 @@
   // Icons
   lucide.createIcons();
 
-  // --- Gating logic for Stripe button ---
+  // --- Stripe links per course (REPLACE with your live/test links) ---
+  const STRIPE_LINKS = {
+    explorers: "https://buy.stripe.com/dRm6oBaSg5p1d8CbXW2go02",   // Code Explorers
+    adventurers: "https://buy.stripe.com/00w28le4seZB8SmaTS2go03"      // Code Adventurers (example)
+  };
+
+  // --- State ---
+  let selectedCourse = "";
+
+  // Elements
   const checkbox = document.getElementById('formSubmitted');
   const stripeBtn = document.getElementById('stripeBtn');
+  const courseSelect = document.getElementById('courseSelect');
+  const courseSummary = document.getElementById('courseSummary');
 
-  // Stripe checkout URL (test)
-  const STRIPE_URL = "https://buy.stripe.com/test_8x2dR23QpchhdND9E66Vq00";
+  // Helpers
+  function setSelectedCourse(value) {
+    selectedCourse = value || "";
+    courseSelect.value = selectedCourse || "";
+    updateCourseSummary();
+    updateStripeState();
+    highlightSelectedCard();
+  }
+
+  function updateCourseSummary(){
+    if (!selectedCourse) {
+      courseSummary.textContent = "No course selected.";
+      return;
+    }
+    const label = selectedCourse === "explorers" ? "Code Explorers — $150" : "Code Adventurers — $160";
+    courseSummary.textContent = `Selected: ${label}`;
+  }
 
   function updateStripeState() {
-    if (checkbox.checked) {
-      stripeBtn.disabled = false;
-    } else {
-      stripeBtn.disabled = true;
+    const ready = checkbox.checked && !!selectedCourse && !!STRIPE_LINKS[selectedCourse];
+    stripeBtn.disabled = !ready;
+  }
+
+  function highlightSelectedCard(){
+    document.getElementById('card-explorers').classList.remove('selected-ring');
+    document.getElementById('card-adventurers').classList.remove('selected-ring');
+    if (selectedCourse === "explorers") {
+      document.getElementById('card-explorers').classList.add('selected-ring');
+    } else if (selectedCourse === "adventurers") {
+      document.getElementById('card-adventurers').classList.add('selected-ring');
     }
   }
-  checkbox.addEventListener('change', updateStripeState);
-  updateStripeState();
 
-  stripeBtn.addEventListener('click', (e) => {
-    if (stripeBtn.disabled) return;
-    window.open(STRIPE_URL, '_blank', 'noopener');
+  // Program card "Select this Program" buttons
+  document.querySelectorAll('.select-course').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setSelectedCourse(btn.dataset.course);
+      // Scroll to payment
+      const anchor = document.getElementById('enrollment');
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
 
-  // (Optional) If you ever want to use the confirmation page again:
+  // Dropdown selection
+  courseSelect.addEventListener('change', (e) => {
+    setSelectedCourse(e.target.value);
+  });
+
+  // Checkbox gating
+  checkbox.addEventListener('change', updateStripeState);
+
+  // Initial state
+  updateCourseSummary();
+  updateStripeState();
+
+  // Stripe action
+  stripeBtn.addEventListener('click', () => {
+    if (stripeBtn.disabled) return;
+    const url = STRIPE_LINKS[selectedCourse];
+    if (!url) { alert("Stripe link for this course is not set."); return; }
+    window.open(url, '_blank', 'noopener');
+  });
+
+  // (Optional) confirmation page back button if used later
   const backToFormBtn = document.getElementById('backToForm');
   if (backToFormBtn) {
     backToFormBtn.addEventListener('click', () => {
@@ -322,7 +390,7 @@
     });
   }
 
-  // Prevent smooth-scroll issues for hash links
+  // Smooth anchor scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       const target = document.querySelector(a.getAttribute('href'));
@@ -335,4 +403,3 @@
 </script>
 </body>
 </html>
-
